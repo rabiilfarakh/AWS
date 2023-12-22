@@ -1,0 +1,90 @@
+*{
+    margin: 0;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #59738D;
+    height: 100vh;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+}
+header .logo {
+    background-image: url(./../images/logo.png);
+    width: 120px; 
+    height: 50px; 
+    background-size: cover;
+    background-position: center;
+    border-radius: 90px;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+header button {
+    width: 7vw;
+    height: 2.5vw;
+    margin-right: 50px;
+    margin-top: 25px;
+    border-radius: 8px;
+    border: 1px solid;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}
+header button:hover {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+}
+.sec1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sec1 .question{
+    width: 30vw;
+    height: 15vw;
+    background-color: rgb(255, 255, 255);
+    border-radius: 12px;
+    border: 1px solid;
+}
+.sec2 form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+}
+.sec2 form .div1,.div2{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.sec2 form input{
+    width: 30vw;
+    height: 4vw;
+    border-radius: 12px;
+    border: 1px solid;
+    cursor: pointer;
+    color: white;
+    background-color: black;
+}
+.sec2 form input:hover{
+    background-color: #ffffff;
+    color: black;
+}
+footer{
+    background-color: rgb(32, 33, 34);
+}
+footer .container{
+    text-align: center;
+    padding-top: 10px ;
+    padding-bottom: 10px ;
+    color: white;
+}
+footer .container p{
+    color: #59738D;
+}
+footer .container a{
+    color: #ffffff;
+}

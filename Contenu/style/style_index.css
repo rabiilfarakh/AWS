@@ -1,6 +1,5 @@
 *{
     margin: 0;
-
 }
 
 body{
@@ -10,6 +9,7 @@ body{
     background-color: #59738D;
     height: 100vh;
 }
+
 header .logo {
     background-image: url(./../images/logo.png);
     width: 120px; 
@@ -49,7 +49,7 @@ header .logo {
     color: white;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
-.sec1 .user div{
+.sec1 .user form{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -58,7 +58,7 @@ header .logo {
 }
 .sec1 .user button{
     width: 10vw;
-    background-color: #59738D;
+    background-color: black;
     height: 2.8vw;
     color: white;
     border-radius: 8px;
@@ -66,13 +66,12 @@ header .logo {
     padding: 6px;
 }
 .sec1 .user button:hover{
-    background-color: rgb(59, 60, 60);
+    background-color: #59738D;
     cursor: pointer;
     color: white;
 }
 footer{
     background-color: rgb(32, 33, 34);
-    
 }
 
 footer .container{
