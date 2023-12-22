@@ -1,0 +1,90 @@
+*{
+    margin: 0;
+
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #59738D;
+    height: 100vh;
+}
+header .logo {
+    background-image: url(./../images/logo.png);
+    width: 120px; 
+    height: 50px; 
+    background-size: cover;
+    background-position: center;
+    border-radius: 90px;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+.sec1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.sec1 .user{
+    background-color: black;
+    width: 30vw;
+    height: 16vw;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: -120px;
+}
+.sec1 .user input{
+    width: 18vw;
+    height: 2vw;
+    border-radius: 8px;
+    border: 1px solid ;
+    padding: 6px;
+}
+.sec1 .user h2{
+    color: white;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.sec1 .user div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.sec1 .user button{
+    width: 10vw;
+    background-color: #59738D;
+    height: 2.8vw;
+    color: white;
+    border-radius: 8px;
+    border: 1px solid ;
+    padding: 6px;
+}
+.sec1 .user button:hover{
+    background-color: rgb(59, 60, 60);
+    cursor: pointer;
+    color: white;
+}
+footer{
+    background-color: rgb(32, 33, 34);
+    
+}
+
+footer .container{
+    text-align: center;
+    padding-top: 10px ;
+    padding-bottom: 10px ;
+    color: white;
+}
+footer .container p{
+    color: #59738D;
+}
+footer .container a{
+    color: #ffffff;
+}
+
