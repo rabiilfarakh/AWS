@@ -1,6 +1,6 @@
 <?php 
 
-require_once "db_configue";
+require_once "db_configue.php";
 class db{
 
     public function connect(){
@@ -15,3 +15,4 @@ class db{
 }
 
 ?>
+
