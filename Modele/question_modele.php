@@ -1,12 +1,11 @@
 <?php
 require_once "./BD/db.php";
-
-class Question
-{
+class Question{
     private $db;
-    private $id;
+    private $idQ;
     private $question;
     private $idT;
+    private $theme;
 
     public function __get($propertyName)
     {
@@ -20,28 +19,31 @@ class Question
     {
         if (property_exists($this, $propertyName))
             $this->$propertyName = $value;
-        else
-            return null;
-         
+        
+        return null; 
     }
 
-    public function recupererQ()
+    public function getQuestion()
     {
-        $this->db = new DB();
+        $this->db = new db();
         $pdo = $this->db->connect();
 
-        $query = "SELECT * FROM question WHERE idQ = :idQ";
+        $query = "SELECT q.*,t.theme FROM question q
+                    join  theme t 
+                    where t.idT = q.idT 
+                    AND q.idQ = :idQ";
+
         $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':idQ', $this->id);
+        $stmt->bindParam(':idQ', $this->idQ);
         $stmt->execute();
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-
-            $this->id = $result['idQ'];
+            $this->idQ = $result['idQ'];
             $this->question = $result['question'];
             $this->idT = $result['idT'];
+            $this->theme = $result['theme'];
             return true;
         }
 

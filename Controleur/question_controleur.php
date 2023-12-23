@@ -1,26 +1,31 @@
 <?php
 require_once "./Modele/question_modele.php";
 
-class QuestionController
+class QuestionControleur
 {
     public $questionText; 
     public $questionID;   
-    public $themeID;      
+    public $themeID;    
+    public $theme;  
 
-    public function recupererQuestion()
+    public function getQuestionControleur($i)
     {
         $questionModel = new Question();
-        $questionModel->id = 1;
+        $questionModel->idQ = $i;
 
-        if ($questionModel->recupererQ()) {
-            $this->questionID = $questionModel->id;
+        if ($questionModel->getQuestion()) {
+
+            $this->questionID = $questionModel->idQ;
             $this->questionText = $questionModel->question;
             $this->themeID = $questionModel->idT;
+            $this->theme = $questionModel->theme;
 
             require_once "./Vue/quizz_vue.php";
         } else {
-            echo "La question avec l'ID {$questionModel->id} n'a pas été trouvée.";
+            echo "La question avec l'ID {$questionModel->idQ} n'a pas été trouvée.";
         }
     }
+
+    
 }
 ?>
