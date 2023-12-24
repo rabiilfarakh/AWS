@@ -2,12 +2,19 @@
 session_start();
 require_once "./Controleur/question_controleur.php";
 require_once "./Controleur/reponse_controleur.php";
+require_once "./Controleur/result_controleur.php";
 
-$i = isset($_GET['id']) ? intval($_GET['id']) : 1; 
+$i = isset($_GET['id']) ? $_GET['id'] : 1;
+$selectedAnswer = isset($_GET['answer']) ? intval($_GET['answer']) : null;
+
+
 $objetQuestion = new QuestionControleur();
 $objetReponse = new ReponseControleur();
+$objetResult = new ResultControleur();
+
 $objetQuestion->getQuestionControleur($i);
 $objetReponse->getReponseContoleur($i);
+$objetResult->insertReponseContoleur($i,$selectedAnswer);
 ?>
 
 <!DOCTYPE html>
@@ -25,31 +32,59 @@ $objetReponse->getReponseContoleur($i);
         <button type="button" id="next">Next</button>
     </header>
     <section class="sec1">
+        <h2 style="color:black"><?php echo  'Question ' . $i ?><h2>
         <div class="question">
-        <h2 style="color:#59738D"><?php echo '<span style="color:red"> Question ' . $i.'</span><br>'.$objetQuestion->theme ; ?></h2>
-            <h3><?php echo $objetQuestion->questionText; ?></h3>
+            <h3 style="color:#59738D"><?php echo $objetQuestion->theme ;?></h3>
+            <h5><?php echo $objetQuestion->questionText; ?></h5>
         </div>
     </section>
     <section class="sec2">
-        <form method="POST" id="answersForm">
+        <form method="GET" id="answersForm">
             <div class="div1">
-                <input type="submit" value="<?php echo 'A) ' . $objetReponse->reponses[0]['reponse']; ?>">
-                <input type="submit" value="<?php echo 'B) ' . $objetReponse->reponses[1]['reponse']; ?>">
+                <button type="button" class="answerButton" value="1">A) <?php echo $objetReponse->reponses[0]['reponse']; ?></button>
+                <button type="button" class="answerButton" value="2">B) <?php echo $objetReponse->reponses[1]['reponse']; ?></button>
             </div>
             <div class="div2">
-                <input type="submit" value="<?php echo 'C) ' . $objetReponse->reponses[2]['reponse']; ?>">
-                <input type="submit" value="<?php echo 'D) ' . $objetReponse->reponses[3]['reponse']; ?>">
+                <button type="button" class="answerButton" value="3">C) <?php echo $objetReponse->reponses[2]['reponse']; ?></button>
+                <button type="button" class="answerButton" value="4">D) <?php echo $objetReponse->reponses[3]['reponse']; ?></button>
             </div>
+            <input type="hidden" name="selectedAnswer" id="selectedAnswer" value="">
         </form>
     </section>
+    
     <!-- footer -->
     <?php require_once "./Contenu/footer.php";?>
 
+    <!-- ajax -->
     <script>
         $(document).ready(function() {
-            $("#next").click(function() {
-
+            $(".answerButton").click(function() {
                 <?php $i++; ?>
+                var selectedAnswer = $(this).val();
+                $("#selectedAnswer").val(selectedAnswer);
+
+                <?php if ($i > 10) : ?>
+                        window.location.href = "result.php";
+                <?php else: ?>
+                $.ajax({
+                    type: "GET",
+                    url: "quizz.php",
+                    data: { id: <?php echo $i; ?>, answer: selectedAnswer },
+                    success: function(response) {
+                        $("body").html(response);
+                    }
+                });
+                <?php endif; ?>
+            });
+
+
+
+        $("#next").click(function() {
+            <?php $i++; ?>
+
+            <?php if ($i > 10) : ?>
+                window.location.href = "result.php";
+            <?php else : ?>
                 $.ajax({
                     type: "GET",
                     url: "quizz.php",
@@ -58,8 +93,9 @@ $objetReponse->getReponseContoleur($i);
                         $("body").html(response);
                     }
                 });
-            });
+            <?php endif; ?>
         });
+    });
     </script>
 </body>
 </html>

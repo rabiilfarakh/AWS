@@ -41,6 +41,8 @@ header button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 15px;
 }
 .sec1 .question{
     width: 30vw;
@@ -55,11 +57,15 @@ header button:hover {
     flex-direction: column;
     gap: 30px;
 }
-.sec1 .question h2{
-    margin-top: -10px;
+.sec1 h2{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+.sec1 .question h5{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 10px 30px;
+}
 .sec1 .question h3{
+    padding: 0px 30px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .sec2 form{
@@ -73,7 +79,7 @@ header button:hover {
     flex-direction: column;
     gap: 24px;
 }
-.sec2 form input{
+.sec2 form button{
     width: 30vw;
     height: 4vw;
     border-radius: 12px;
@@ -82,7 +88,7 @@ header button:hover {
     color: white;
     background-color: black;
 }
-.sec2 form input:hover{
+.sec2 form button:hover{
     background-color: #ffffff;
     color: black;
 }
