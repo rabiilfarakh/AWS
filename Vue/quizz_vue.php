@@ -32,6 +32,7 @@ $objetResult->insertReponseContoleur($i,$selectedAnswer);
         <button type="button" id="next">Next</button>
     </header>
     <section class="sec1">
+        <?php var_dump($selectedAnswer)?>
         <h2 style="color:black"><?php echo  'Question ' . $i ?><h2>
         <div class="question">
             <h3 style="color:#59738D"><?php echo $objetQuestion->theme ;?></h3>
@@ -39,17 +40,18 @@ $objetResult->insertReponseContoleur($i,$selectedAnswer);
         </div>
     </section>
     <section class="sec2">
-        <form method="GET" id="answersForm">
-            <div class="div1">
-                <button type="button" class="answerButton" value="1">A) <?php echo $objetReponse->reponses[0]['reponse']; ?></button>
-                <button type="button" class="answerButton" value="2">B) <?php echo $objetReponse->reponses[1]['reponse']; ?></button>
-            </div>
-            <div class="div2">
-                <button type="button" class="answerButton" value="3">C) <?php echo $objetReponse->reponses[2]['reponse']; ?></button>
-                <button type="button" class="answerButton" value="4">D) <?php echo $objetReponse->reponses[3]['reponse']; ?></button>
-            </div>
-            <input type="hidden" name="selectedAnswer" id="selectedAnswer" value="">
-        </form>
+    <form method="GET" id="answersForm">
+        <div class="div1">
+            <button type="button" class="answerButton" value="<?php echo $objetReponse->reponses[0]['idR']; ?>">A) <?php echo $objetReponse->reponses[0]['reponse']; ?></button>
+            <button type="button" class="answerButton" value="<?php echo $objetReponse->reponses[1]['idR']; ?>">B) <?php echo $objetReponse->reponses[1]['reponse']; ?></button>
+        </div>
+        <div class="div2">
+            <button type="button" class="answerButton" value="<?php echo $objetReponse->reponses[2]['idR']; ?>">C) <?php echo $objetReponse->reponses[2]['reponse']; ?></button>
+            <button type="button" class="answerButton" value="<?php echo $objetReponse->reponses[3]['idR']; ?>">D) <?php echo $objetReponse->reponses[3]['reponse']; ?></button>
+        </div>
+        <input type="hidden" name="selectedAnswer" id="selectedAnswer" value="">
+    </form>
+
     </section>
     
     <!-- footer -->

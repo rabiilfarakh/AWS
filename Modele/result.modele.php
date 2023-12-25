@@ -32,6 +32,25 @@ class Result{
         return null;
     }
 
+    public function score(){
+        $this->db = new db();
+        $pdo = $this->db->connect();
+    
+        $query = "SELECT COUNT(rs.idRes) as total FROM result rs
+                  JOIN reponse rp ON rp.idR = rs.idR
+                  WHERE rp.statut = true";
+        
+        $stmt = $pdo->prepare($query);
+    
+        if($stmt->execute()) {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'];
+        }
+        
+        return null;
+    }
+    
+
 }
 
 ?>
