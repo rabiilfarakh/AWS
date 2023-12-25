@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once "./Controleur/question_controleur.php";
 require_once "./Controleur/reponse_controleur.php";
 require_once "./Controleur/result_controleur.php";
@@ -7,14 +8,21 @@ require_once "./Controleur/result_controleur.php";
 $i = isset($_GET['id']) ? $_GET['id'] : 1;
 $selectedAnswer = isset($_GET['answer']) ? intval($_GET['answer']) : null;
 
-
 $objetQuestion = new QuestionControleur();
 $objetReponse = new ReponseControleur();
 $objetResult = new ResultControleur();
 
+$objetResult->insertLast($i,$selectedAnswer);
 $objetQuestion->getQuestionControleur($i);
 $objetReponse->getReponseContoleur($i);
-$objetResult->insertReponseContoleur($i,$selectedAnswer);
+
+if($i>1){
+    $objetResult->insertReponseContoleur($i-1,$selectedAnswer);
+}else{
+    $objetResult->deleteControleur();
+}
+
+session_destroy();
 ?>
 
 <!DOCTYPE html>
@@ -32,8 +40,7 @@ $objetResult->insertReponseContoleur($i,$selectedAnswer);
         <button type="button" id="next">Next</button>
     </header>
     <section class="sec1">
-        <?php var_dump($selectedAnswer)?>
-        <h2 style="color:black"><?php echo  'Question ' . $i ?><h2>
+        <h2 style="color:black"><?php echo  'Question ' . $i;?><h2>
         <div class="question">
             <h3 style="color:#59738D"><?php echo $objetQuestion->theme ;?></h3>
             <h5><?php echo $objetQuestion->questionText; ?></h5>
@@ -58,6 +65,7 @@ $objetResult->insertReponseContoleur($i,$selectedAnswer);
     <?php require_once "./Contenu/footer.php";?>
 
     <!-- ajax -->
+    
     <script>
         $(document).ready(function() {
             $(".answerButton").click(function() {
@@ -65,9 +73,7 @@ $objetResult->insertReponseContoleur($i,$selectedAnswer);
                 var selectedAnswer = $(this).val();
                 $("#selectedAnswer").val(selectedAnswer);
 
-                <?php if ($i > 10) : ?>
-                        window.location.href = "result.php";
-                <?php else: ?>
+
                 $.ajax({
                     type: "GET",
                     url: "quizz.php",
@@ -76,17 +82,12 @@ $objetResult->insertReponseContoleur($i,$selectedAnswer);
                         $("body").html(response);
                     }
                 });
-                <?php endif; ?>
+
             });
-
-
-
+            
         $("#next").click(function() {
-            <?php $i++; ?>
 
-            <?php if ($i > 10) : ?>
-                window.location.href = "result.php";
-            <?php else : ?>
+
                 $.ajax({
                     type: "GET",
                     url: "quizz.php",
@@ -95,7 +96,7 @@ $objetResult->insertReponseContoleur($i,$selectedAnswer);
                         $("body").html(response);
                     }
                 });
-            <?php endif; ?>
+
         });
     });
     </script>

@@ -49,6 +49,52 @@ class Result{
         
         return null;
     }
+
+    public function delete(){
+        $this->db = new db();
+        $pdo = $this->db->connect();
+    
+        $query = "DELETE FROM result WHERE idRes > 0";
+        $query2 = "ALTER TABLE result AUTO_INCREMENT = 1";
+        
+        $stmt = $pdo->prepare($query);
+        $stmt2 = $pdo->prepare($query2);
+    
+        if(!($stmt->execute() && $stmt2->execute())) 
+            return false;
+    }
+
+    public function statuts(){
+        $this->db = new db();
+        $pdo = $this->db->connect();
+    
+        $query = "SELECT rp.statut  , q.idQ , rp.reponse FROM reponse rp 
+                    JOIN result rs ON rs.idR = rp.idR
+                    JOIN question q ON q.idQ = rp.idQ";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+    
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
+
+    public function justification($idQ){
+        $this->db = new db();
+        $pdo = $this->db->connect();
+    
+        $this->idQ = $idQ;
+        $query = "SELECT justification FROM reponse 
+                WHERE statut = 1 AND idQ = ?";
+        
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(1, $this->idQ, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
+    
+    
     
 
 }
