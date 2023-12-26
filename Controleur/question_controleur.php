@@ -13,7 +13,7 @@ class QuestionControleur
         $questionModel = new Question();
         $questionModel->idQ = $i;
 
-        if ($questionModel->getQuestion()) {
+        if ($questionModel->getAllQuestions()) {
 
             $this->questionID = $questionModel->idQ;
             $this->questionText = $questionModel->question;
