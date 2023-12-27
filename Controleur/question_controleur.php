@@ -8,12 +8,11 @@ class QuestionControleur
     public $themeID;    
     public $theme;  
 
-    public function getQuestionControleur($i)
+    public function getQuestionControleur($array)
     {
         $questionModel = new Question();
-        $questionModel->idQ = $i;
 
-        if ($questionModel->getAllQuestions()) {
+        if ($questionModel->getQuestion($array)) {
 
             $this->questionID = $questionModel->idQ;
             $this->questionText = $questionModel->question;

@@ -23,24 +23,34 @@ class Question{
         return null; 
     }
 
-    public function getAllQuestions()
+    public function getQuestion($array)
     {
         $this->db = new db();
         $pdo = $this->db->connect();
     
-        try {
-            $query = "SELECT * FROM question";
+        // Construction de la clause WHERE conditionnelle
+        $whereClause = (!empty($array)) ? "WHERE q.idQ NOT IN (" . implode(',', $array) . ")" : "";
     
-            $stmt = $pdo->prepare($query);
-            $stmt->execute();
+        $query = "SELECT q.*, t.theme FROM question q
+                  JOIN theme t ON t.idT = q.idT 
+                  {$whereClause}
+                  ORDER BY RAND()
+                  LIMIT 1";
     
-            $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
     
-            return $questions;
-        } catch (PDOException $e) {
-            
-            return false;
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($result) {
+            $this->idQ = $result['idQ'];
+            $this->question = $result['question'];
+            $this->idT = $result['idT'];
+            $this->theme = $result['theme'];
+            return true;
         }
+    
+        return false;
     }
     
 }
