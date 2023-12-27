@@ -1,6 +1,7 @@
 ![image](https://github.com/rabiilfarakh/AWS/assets/109187438/558308fd-962b-48f3-bab3-21eb045556c1)
 
-## diagramme de classe : ![Screenshot_2023-12-27_141254](https://github.com/rabiilfarakh/AWS/assets/109187438/c4abecb4-6bc9-4a11-97a6-42183d347acb)
+## diagramme de classe : ![image](https://github.com/rabiilfarakh/AWS/assets/109187438/639c01c4-8e64-456b-99a6-32e911b16d4c)
+
 
 
 ![image](https://github.com/rabiilfarakh/AWS/assets/109187438/1ea9f4f3-4b7e-40c5-bad7-eb1beba38870)
